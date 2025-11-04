@@ -3,38 +3,35 @@ Feature: Transferencia entre cuentas
 
   Background:
     * url baseUrl
-    * header Accept = 'application/json' 
-    * def customerId = 14099
+    * header Accept = 'application/json'
     * def fromAccountId = 16896
     * def toAccountId = 18339
-    * def transferAmount = 5.00
+    * def amount = 50.00
 
   Scenario: Realizar una transferencia entre cuentas válidas y verificar actualización de saldos
-    # 🔹 Consultar saldos antes de la transferencia
-    Given path 'customers', customerId, 'accounts'
+    Given path 'customers/14099/accounts'
     When method GET
     Then status 200
     * def before = response
-    * def fromBefore = before.accounts.account.find(x => x.id == fromAccountId).balance
-    * def toBefore = before.accounts.account.find(x => x.id == toAccountId).balance
+    * def fromBefore = before.find(x => x.id == fromAccountId).balance
+    * def toBefore = before.find(x => x.id == toAccountId).balance
 
-    # 🔹 Ejecutar transferencia
     Given path 'transfer'
     And param fromAccountId = fromAccountId
     And param toAccountId = toAccountId
-    And param amount = transferAmount
+    And param amount = amount
     When method POST
     Then status 200
     And match response contains 'Successfully transferred'
 
-    # 🔹 Consultar saldos después de la transferencia
-    Given path 'customers', customerId, 'accounts'
+    # Consultar balances después de la transferencia
+    Given path 'customers/14099/accounts'
     When method GET
     Then status 200
     * def after = response
-    * def fromAfter = after.accounts.account.find(x => x.id == fromAccountId).balance
-    * def toAfter = after.accounts.account.find(x => x.id == toAccountId).balance
+    * def fromAfter = after.find(x => x.id == fromAccountId).balance
+    * def toAfter = after.find(x => x.id == toAccountId).balance
 
-    # 🔹 Validar el cambio en los saldos
-    And assert fromAfter == fromBefore - transferAmount
-    And assert toAfter == toBefore + transferAmount
+    # Validar actualización de saldos
+    * match fromAfter == fromBefore - amount
+    * match toAfter == toBefore + amount
