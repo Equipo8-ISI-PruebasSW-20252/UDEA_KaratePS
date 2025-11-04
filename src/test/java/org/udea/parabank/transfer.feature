@@ -3,7 +3,7 @@ Feature: Transferencia entre cuentas
 
   Background:
     * url baseUrl
-    * header Accept = 'application/json'
+    * header Accept = 'application/json' 
     * def customerId = 14099
     * def fromAccountId = 16896
     * def toAccountId = 18339
