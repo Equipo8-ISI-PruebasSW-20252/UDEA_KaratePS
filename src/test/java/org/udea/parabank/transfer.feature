@@ -4,7 +4,7 @@ Feature: Transferencia entre cuentas
   Background:
     * url baseUrl
     * header Accept = 'application/json'
-    * def fromAccountId = 16896
+    * def fromAccountId = 16896 
     * def toAccountId = 18339
     * def amount = 50.00
 
