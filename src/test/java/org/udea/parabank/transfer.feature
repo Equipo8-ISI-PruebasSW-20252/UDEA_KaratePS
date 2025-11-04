@@ -11,7 +11,7 @@ Feature: Transferencia entre cuentas
 
   Scenario: Realizar una transferencia entre cuentas válidas y verificar actualización de saldos
     # 🔹 Consultar saldos antes de la transferencia
-    Given path 'services/bank/customers', customerId, 'accounts'
+    Given path 'customers', customerId, 'accounts'
     When method GET
     Then status 200
     * def before = response
@@ -19,7 +19,7 @@ Feature: Transferencia entre cuentas
     * def toBefore = before.find(x => x.id == toAccountId).balance
 
     # 🔹 Ejecutar transferencia
-    Given path 'services/bank/transfer'
+    Given path 'transfer'
     And param fromAccountId = fromAccountId
     And param toAccountId = toAccountId
     And param amount = transferAmount
@@ -28,7 +28,7 @@ Feature: Transferencia entre cuentas
     And match response contains 'Successfully transferred'
 
     # 🔹 Consultar saldos después de la transferencia
-    Given path 'services/bank/customers', customerId, 'accounts'
+    Given path 'customers', customerId, 'accounts'
     When method GET
     Then status 200
     * def after = response
