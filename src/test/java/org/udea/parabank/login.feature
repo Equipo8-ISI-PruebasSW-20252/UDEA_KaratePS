@@ -12,7 +12,7 @@ Feature: Login to Parabank
     When method GET
     Then status 200
     And match response ==
-  
+    """
     {
         "id": 14099,
         "firstName": "Equipo_8",
@@ -26,4 +26,4 @@ Feature: Login to Parabank
         "phoneNumber": "852653",
         "ssn": "4525"
     }
-    
+    """
