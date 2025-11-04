@@ -1,4 +1,4 @@
-@parabank_transfer
+@transfer
 Feature: Transferencia entre cuentas
 
   Background:
@@ -7,9 +7,10 @@ Feature: Transferencia entre cuentas
 
   Scenario: Realizar una transferencia entre cuentas válidas
     Given path 'transfer'
-    And form field fromAccountId = 16896
-    And form field toAccountId = 18339
-    And form field amount = 50.00
+    And param fromAccountId = 16896
+    And param toAccountId = 18339
+    And param amount = 50.00
     When method POST
     Then status 200
     And match response contains 'Transfer Complete'
+
