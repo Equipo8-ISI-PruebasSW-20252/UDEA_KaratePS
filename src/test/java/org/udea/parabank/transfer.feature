@@ -12,5 +12,6 @@ Feature: Transferencia entre cuentas
     And param amount = 50.00
     When method POST
     Then status 200
-    And match response contains 'Transfer Complete'
+    And match response contains 'Successfully transferred'
+
 
