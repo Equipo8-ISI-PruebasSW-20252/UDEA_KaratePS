@@ -7,7 +7,7 @@ Feature: Transferencia entre cuentas
     * def customerId = 14099
     * def fromAccountId = 16896
     * def toAccountId = 18339
-    * def transferAmount = 50.00
+    * def transferAmount = 5.00
 
   Scenario: Realizar una transferencia entre cuentas válidas y verificar actualización de saldos
     # 🔹 Consultar saldos antes de la transferencia
@@ -15,8 +15,8 @@ Feature: Transferencia entre cuentas
     When method GET
     Then status 200
     * def before = response
-    * def fromBefore = before.find(x => x.id == fromAccountId).balance
-    * def toBefore = before.find(x => x.id == toAccountId).balance
+    * def fromBefore = before.accounts.account.find(x => x.id == fromAccountId).balance
+    * def toBefore = before.accounts.account.find(x => x.id == toAccountId).balance
 
     # 🔹 Ejecutar transferencia
     Given path 'transfer'
@@ -32,9 +32,9 @@ Feature: Transferencia entre cuentas
     When method GET
     Then status 200
     * def after = response
-    * def fromAfter = after.find(x => x.id == fromAccountId).balance
-    * def toAfter = after.find(x => x.id == toAccountId).balance
+    * def fromAfter = after.accounts.account.find(x => x.id == fromAccountId).balance
+    * def toAfter = after.accounts.account.find(x => x.id == toAccountId).balance
 
     # 🔹 Validar el cambio en los saldos
-    And match fromAfter == fromBefore - transferAmount
-    And match toAfter == toBefore + transferAmount
+    And assert fromAfter == fromBefore - transferAmount
+    And assert toAfter == toBefore + transferAmount
