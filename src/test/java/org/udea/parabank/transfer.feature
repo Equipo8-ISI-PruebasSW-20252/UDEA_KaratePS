@@ -7,7 +7,7 @@ Feature: Transferencia entre cuentas
     * header Content-Type = 'application/json'
 
   Scenario: Realizar una transferencia entre cuentas válidas
-    Given path 'services/bank/transfer'
+    Given path 'transfer'
     And request
     """
     {
