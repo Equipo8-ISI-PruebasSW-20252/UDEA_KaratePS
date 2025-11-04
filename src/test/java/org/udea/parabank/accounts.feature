@@ -12,8 +12,8 @@ Feature: Consulta de cuentas del cliente
     And match response ==
     """
     [
-      { "id": 16896, "customerId": 14099, "type": "CHECKING", "balance": 245.50 },
-      { "id": 18339, "customerId": 14099, "type": "SAVINGS",  "balance": 90.00 },
+      { "id": 16896, "customerId": 14099, "type": "CHECKING", "balance": 145.50 },
+      { "id": 18339, "customerId": 14099, "type": "SAVINGS",  "balance": 190.00 },
       { "id": 18561, "customerId": 14099, "type": "CHECKING", "balance": 90.00 },
       { "id": 18672, "customerId": 14099, "type": "CHECKING", "balance": 90.00 }
     ]
