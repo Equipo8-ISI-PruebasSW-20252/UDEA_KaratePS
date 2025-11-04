@@ -7,23 +7,23 @@ Feature: Login to Parabank
 
   Scenario: Customer Login
     Given path 'login'
-    And path 'john' //userName
-    And path 'demo' //password
+    And path 'Equipo_8' //userName
+    And path '123' //password
     When method GET
     Then status 200
     And match response ==
     """
     {
-       "id": '#number',
-       "firstName": '#string',
-       "lastName": '#string',
-       "address": {
-            "street": '#string',
-            "city": '#string',
-            "state": '#string',
-            "zipCode": '#string'
+        "id": 14099,
+        "firstName": "Equipo_8",
+        "lastName": "P_SW",
+        "address": {
+            "street": "calle 4 # 3 - 2",
+            "city": "medellin",
+            "state": "antioquia",
+            "zipCode": "34567890987654"
         },
-       "phoneNumber": '#string',
-       "ssn": '#string'
+        "phoneNumber": "852653",
+        "ssn": "4525"
     }
     """
