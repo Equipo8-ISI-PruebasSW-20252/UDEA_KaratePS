@@ -8,7 +8,7 @@ Feature: Pago fallido por saldo insuficiente
     * def fromAccountId = 16896
     * def payeeName = 'Servicios Públicos'
     * def accountNumber = '12345678'
-    * def amount = 9999999.99  
+    * def amount = 9999999.99  # monto mayor al saldo disponible
 
   Scenario: Simular pago fallido por saldo insuficiente
     # Obtener el saldo actual de la cuenta origen
@@ -20,10 +20,10 @@ Feature: Pago fallido por saldo insuficiente
     * print 'Saldo actual:', balance
 
     # Verificar que el monto a pagar es mayor que el saldo (precondición)
-    * match amount > balance
+    * assert amount > balance
 
     # Intentar realizar el pago con saldo insuficiente
-    Given path 'billpay'
+    Given path 'services/bank/billpay'
     And request
       """
       {
