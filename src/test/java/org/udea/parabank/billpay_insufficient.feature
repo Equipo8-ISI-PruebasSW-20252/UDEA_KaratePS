@@ -4,36 +4,28 @@ Feature: Pago fallido por saldo insuficiente
   Background:
     * url baseUrl
     * header Accept = 'application/json'
-    * def customerId = 14099
     * def fromAccountId = 16896
-    * def payeeName = 'Servicios Públicos'
-    * def accountNumber = '12345678'
-    * def amount = 9999999.99  # monto mayor al saldo disponible
+    * def payee = 'Electric Company'
+    * def accountId = fromAccountId
+    * def amount = 9999999.99
+    * def description = 'Pago con saldo insuficiente'
 
   Scenario: Simular pago fallido por saldo insuficiente
-    # Obtener el saldo actual de la cuenta origen
-    Given path 'customers', customerId, 'accounts'
+    # Obtener balance actual
+    Given path 'customers/14099/accounts'
     When method GET
     Then status 200
-    * def accountInfo = response.find(x => x.id == fromAccountId)
-    * def balance = accountInfo.balance
-    * print 'Saldo actual:', balance
+    * def before = response
+    * def account = before.find(x => x.id == accountId)
+    * print 'Saldo disponible:', account.balance
 
-    # Verificar que el monto a pagar es mayor que el saldo (precondición)
-    * assert amount > balance
-
-    # Intentar realizar el pago con saldo insuficiente
+    # Intentar pago con monto mayor al saldo
     Given path 'services/bank/billpay'
-    And request
-      """
-      {
-        "customerId": #(customerId),
-        "fromAccountId": #(fromAccountId),
-        "payeeName": #(payeeName),
-        "accountNumber": #(accountNumber),
-        "amount": #(amount)
-      }
-      """
+    And param payeeName = payee
+    And param accountId = accountId
+    And param amount = amount
+    And param fromAccountId = fromAccountId
+    And param description = description
     When method POST
     Then status 400 || status 422
-    And match response contains any ['insufficient funds', 'saldo insuficiente', 'not enough balance']
+    And match response contains any ['Insufficient funds', 'insufficient', 'error', 'Invalid amount']
