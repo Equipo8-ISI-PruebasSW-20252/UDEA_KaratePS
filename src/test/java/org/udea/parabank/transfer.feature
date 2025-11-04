@@ -37,6 +37,12 @@ Feature: Transferencia entre cuentas
     * def fromAfter = accounts.find(x => x.id == fromAccountId).balance
     * def toAfter = accounts.find(x => x.id == toAccountId).balance
 
+    # Convertir strings a números antes de comparar
+    * def fromBeforeNum = +fromBefore
+    * def toBeforeNum = +toBefore
+    * def fromAfterNum = +fromAfter
+    * def toAfterNum = +toAfter
+
     # Validar actualización de saldos
-    * match fromAfter == fromBefore - amount
-    * match toAfter == toBefore + amount
+    * match fromAfterNum == fromBeforeNum - amount
+    * match toAfterNum == toBeforeNum + amount
