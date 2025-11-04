@@ -20,7 +20,7 @@ Feature: Pago fallido por saldo insuficiente
     * print 'Saldo disponible:', account.balance
 
     # Intentar pago con monto mayor al saldo
-    Given path 'services/bank/billpay'
+    Given path 'billpay'
     And param payeeName = payee
     And param accountId = accountId
     And param amount = amount
