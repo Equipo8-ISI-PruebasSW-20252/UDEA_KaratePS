@@ -27,5 +27,12 @@ class TestRunner {
         return Karate.run("billpay_insufficient")
                 .relativeTo(getClass())
                 .outputCucumberJson(true);
-    }  
+    }
+    @Karate.Test
+    Karate test05_ParabankLoan() {
+        return Karate.run("loan")
+                .relativeTo(getClass())
+                .outputCucumberJson(true);
+    }
+
 }
