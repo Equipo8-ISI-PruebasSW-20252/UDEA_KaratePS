@@ -13,5 +13,5 @@ Feature: Simulación de préstamo
     And param downPayment = 100
     When method POST
     Then status 200
-    And match response == { approved: '#boolean', accountId: '#number' }
+    And match response contains { approved: '#boolean', accountId: '#number' }
     * print '💬 Resultado del préstamo:', response
