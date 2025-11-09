@@ -21,7 +21,7 @@ Feature: Pago fallido por saldo insuficiente
       "phoneNumber": "5555555555",
       "accountNumber": "16896",
       "amount": 9999999.99,
-      "fromAccountId": 12345
+      "fromAccountId": 13566
     }
     """
     When method POST
