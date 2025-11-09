@@ -5,7 +5,7 @@ Feature: Transferencia entre cuentas
     * url baseUrl
     * header Accept = 'application/json'
     * def fromAccountId = 13566 
-    * def toAccountId = 18339
+    * def toAccountId = 18894
     * def amount = 50.00
 
   Scenario: Realizar una transferencia entre cuentas válidas y verificar actualización de saldos
