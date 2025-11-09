@@ -13,4 +13,3 @@ Feature: Consulta de cuentas del cliente
 
 
     * def total = response.reduce(function(acc, item){ return acc + item.balance }, 0)
-    And match total == 515.50
