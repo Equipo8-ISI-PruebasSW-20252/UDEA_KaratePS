@@ -4,15 +4,14 @@ Feature: Simulación de préstamo
   Background:
     * url baseUrl
     * header Accept = 'application/json'
-    * header Content-Type = 'application/x-www-form-urlencoded'
 
-  Scenario: Solicitud de préstamo válida
-    Given path 'requestloan'
-    And form field amount = 1000
-    And form field downPayment = 100
-    And form field fromAccountId = 16896
+  Scenario: Solicitar préstamo y verificar respuesta
+    Given path 'requestLoan'
+    And param customerId = 14099
+    And param fromAccountId = 12345
+    And param amount = 1000
+    And param downPayment = 100
     When method POST
     Then status 200
-    And match response contains 'Loan Request Processed' || response contains 'approved' || response contains 'loan'
-
+    And match response == { approved: '#boolean', accountId: '#number' }
     * print '💬 Resultado del préstamo:', response
