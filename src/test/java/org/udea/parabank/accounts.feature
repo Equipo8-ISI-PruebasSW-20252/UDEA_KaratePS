@@ -6,7 +6,7 @@ Feature: Consulta de cuentas del cliente
     * header Accept = 'application/json'
 
   Scenario: Obtener y validar cuentas del usuario
-    Given path 'customers', 12434, 'accounts'
+    Given path 'customers', 13211, 'accounts'
     When method GET
     Then status 200
     And match each response == { id: '#number', customerId: '#number', type: '#string', balance: '#number' }
