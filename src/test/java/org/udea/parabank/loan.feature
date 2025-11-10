@@ -9,7 +9,7 @@ Feature: Simulación de préstamo
     Given path 'requestLoan'
     And param customerId = 21891
     And param fromAccountId = 21891
-    And param amount = 1000
+    And param amount = 100
     And param downPayment = 100
     When method POST
     Then status 200
