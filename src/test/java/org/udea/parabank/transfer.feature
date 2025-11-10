@@ -4,13 +4,13 @@ Feature: Transferencia entre cuentas
   Background:
     * url baseUrl
     * header Accept = 'application/json'
-    * def fromAccountId = 14343 
-    * def toAccountId = 14454
+    * def fromAccountId = 21891 
+    * def toAccountId = 22779
     * def amount = 50.00
 
   Scenario: Realizar una transferencia entre cuentas válidas y verificar actualización de saldos
     # Obtener balances antes de la transferencia
-    Given path 'customers/13211/accounts'
+    Given path 'customers/17540/accounts'
     When method GET
     Then status 200
     * def before = response
@@ -27,7 +27,7 @@ Feature: Transferencia entre cuentas
     And match response contains 'Successfully transferred'
 
     # Consultar balances después de la transferencia
-    Given path 'customers/13211/accounts'
+    Given path 'customers/17540/accounts'
     When method GET
     Then status 200
     * def after = response
