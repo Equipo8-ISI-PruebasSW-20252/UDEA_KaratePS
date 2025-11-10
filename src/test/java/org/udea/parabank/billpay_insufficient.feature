@@ -19,7 +19,7 @@ Feature: Pago fallido por saldo insuficiente
         "zipCode": "62701"
       },
       "phoneNumber": "5555555555",
-      "accountNumber": -16896,
+      "accountNumber": 16896,
       "amount": 9999999.99,
       "fromAccountId": 21891
     }
