@@ -8,7 +8,7 @@ Feature: Simulación de préstamo
   Scenario: Solicitar préstamo y verificar respuesta
     Given path 'requestLoan'
     And param customerId = 21891
-    And param fromAccountId = 22779
+    And param fromAccountId = 21891
     And param amount = 1000
     And param downPayment = 100
     When method POST
